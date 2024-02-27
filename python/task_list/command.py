@@ -8,8 +8,6 @@ class Command:
     def __init__(self, console: Console, backend: TaskBackend) -> None:
         self.console = console
         self.backend = backend
-        # self.last_id: int = 0
-        # self.tasks: Dict[str, List[Task]] = dict()
 
 ##show
         
@@ -39,20 +37,6 @@ class Command:
                 self.console.print(result)
                 self.console.print()
 
-    # def add_project(self, name: str) -> None:
-    #     self.backend.tasks[name] = []
-
-    # def add_task(self, project: str, description: str) -> None:
-    #     project_tasks = self.tasks.get(project)
-    #     if project_tasks is None:
-    #         self.console.print(f"Could not find a project with the name {project}.")
-    #         self.console.print()
-    #         return
-    #     project_tasks.append(Task(self.next_id(), description, False))
-
-    # def next_id(self) -> int:
-    #     self.last_id += 1
-    #     return self.last_id
 
 ##un/check
     
@@ -67,16 +51,6 @@ class Command:
         if result != "":
             self.console.print(result)
             self.console.print()
-
-    # def set_done(self, id_string: str, done: bool) -> None:
-    #     id_ = int(id_string)
-    #     for project, tasks in self.tasks.items():
-    #         for task in tasks:
-    #             if task.id == id_:
-    #                 task.set_done(done)
-    #                 return
-    #     self.console.print(f"Could not find a task with an ID of {id_}")
-    #     self.console.print()
 
 ## help
         
