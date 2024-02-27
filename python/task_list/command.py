@@ -14,7 +14,8 @@ class Command:
 ##show
         
     def show(self) -> None:
-        for project, tasks in self.tasks.items():
+        backend_tasks = self.get()
+        for project, tasks in backend_tasks.items():
             self.console.print(project)
             for task in tasks:
                 self.console.print(f"  [{'x' if task.is_done() else ' '}] {task.id}: {task.description}")
@@ -83,5 +84,5 @@ class Command:
         self.console.print()
 
 ## get
-    def get(self):
+    def get(self) -> Dict[str, List[Task]]:
         return self.backend.get()

@@ -7,6 +7,12 @@ class TaskBackend:
         self.last_id: int = 0
         self.tasks: Dict[str, List[Task]] = dict()
 
+## get
+    def get(self) -> Dict[str, List[Task]]:
+        return self.tasks
+
+## add
+        
     def add_project(self, name: str) -> str:
         project_name = self.tasks.get(name)
         if project_name is None:
@@ -27,3 +33,4 @@ class TaskBackend:
     def next_id(self) -> int:
         self.last_id += 1
         return self.last_id
+    
