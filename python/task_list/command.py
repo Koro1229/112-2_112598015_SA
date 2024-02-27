@@ -2,12 +2,14 @@ from typing import Dict, List
 
 from task_list.console import Console
 from task_list.task import Task
+from task_list.backend import TaskBackend
 
 class Command:
-    def __init__(self, console: Console) -> None:
+    def __init__(self, console: Console, backend: TaskBackend) -> None:
         self.console = console
-        self.last_id: int = 0
-        self.tasks: Dict[str, List[Task]] = dict()
+        self.backend = backend
+        # self.last_id: int = 0
+        # self.tasks: Dict[str, List[Task]] = dict()
 
 ##show
         
@@ -24,25 +26,26 @@ class Command:
         sub_command_rest = command_line.split(" ", 1)
         sub_command = sub_command_rest[0]
         if sub_command == "project":
-            self.add_project(sub_command_rest[1])
+            self.console.print(self.backend.add_project(sub_command_rest[1]))
         elif sub_command == "task":
             project_task = sub_command_rest[1].split(" ", 1)
-            self.add_task(project_task[0], project_task[1])
+            self.console.print(self.backend.add_task(project_task[0], project_task[1]))
 
-    def add_project(self, name: str) -> None:
-        self.tasks[name] = []
 
-    def add_task(self, project: str, description: str) -> None:
-        project_tasks = self.tasks.get(project)
-        if project_tasks is None:
-            self.console.print(f"Could not find a project with the name {project}.")
-            self.console.print()
-            return
-        project_tasks.append(Task(self.next_id(), description, False))
+    # def add_project(self, name: str) -> None:
+    #     self.backend.tasks[name] = []
 
-    def next_id(self) -> int:
-        self.last_id += 1
-        return self.last_id
+    # def add_task(self, project: str, description: str) -> None:
+    #     project_tasks = self.tasks.get(project)
+    #     if project_tasks is None:
+    #         self.console.print(f"Could not find a project with the name {project}.")
+    #         self.console.print()
+    #         return
+    #     project_tasks.append(Task(self.next_id(), description, False))
+
+    # def next_id(self) -> int:
+    #     self.last_id += 1
+    #     return self.last_id
 
 ##un/check
     
@@ -78,3 +81,7 @@ class Command:
     def error(self, command: str) -> None:
         self.console.print(f"I don't know what the command {command} is.")
         self.console.print()
+
+## get
+    def get(self):
+        return self.backend.get()

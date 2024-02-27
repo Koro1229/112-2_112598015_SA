@@ -1,16 +1,18 @@
 from typing import Dict, List
 
 from task_list.console import Console
-from task_list.task import Task
 from task_list.command import Command
+from task_list.backend import TaskBackend
 
 class TaskList:
     QUIT = "quit"
 
     def __init__(self, console: Console) -> None:
         self.console = console
-        self.cmd = Command(console) #same console
+        self.backend = TaskBackend()
+        self.cmd = Command(self.console, self.backend) #same console
 
+    ## run until quit
     def run(self) -> None:
         while True:
             command_str = self.console.input("> ")
@@ -18,6 +20,7 @@ class TaskList:
                 break
             self.execute(command_str)
 
+    ## applicaiton functions    
     def execute(self, command_line: str) -> None:
         command_rest = command_line.split(" ", 1)
         command = command_rest[0]
