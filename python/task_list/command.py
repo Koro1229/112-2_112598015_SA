@@ -27,11 +27,17 @@ class Command:
         sub_command_rest = command_line.split(" ", 1)
         sub_command = sub_command_rest[0]
         if sub_command == "project":
-            self.console.print(self.backend.add_project(sub_command_rest[1]))
+            result = self.backend.add_project(sub_command_rest[1])
+            if result != "":
+                self.console.print(result)
+                self.console.print()
+
         elif sub_command == "task":
             project_task = sub_command_rest[1].split(" ", 1)
-            self.console.print(self.backend.add_task(project_task[0], project_task[1]))
-
+            result = self.backend.add_task(project_task[0], project_task[1])
+            if result != "":
+                self.console.print(result)
+                self.console.print()
 
     # def add_project(self, name: str) -> None:
     #     self.backend.tasks[name] = []
@@ -51,20 +57,26 @@ class Command:
 ##un/check
     
     def check(self, id_string: str) -> None:
-        self.set_done(id_string, True)
-
+        result = self.backend.set_done(id_string, True)
+        if result != "":
+            self.console.print(result)
+            self.console.print()
+            
     def uncheck(self, id_string: str) -> None:
-        self.set_done(id_string, False)
+        result = self.backend.set_done(id_string, False)
+        if result != "":
+            self.console.print(result)
+            self.console.print()
 
-    def set_done(self, id_string: str, done: bool) -> None:
-        id_ = int(id_string)
-        for project, tasks in self.tasks.items():
-            for task in tasks:
-                if task.id == id_:
-                    task.set_done(done)
-                    return
-        self.console.print(f"Could not find a task with an ID of {id_}")
-        self.console.print()
+    # def set_done(self, id_string: str, done: bool) -> None:
+    #     id_ = int(id_string)
+    #     for project, tasks in self.tasks.items():
+    #         for task in tasks:
+    #             if task.id == id_:
+    #                 task.set_done(done)
+    #                 return
+    #     self.console.print(f"Could not find a task with an ID of {id_}")
+    #     self.console.print()
 
 ## help
         
