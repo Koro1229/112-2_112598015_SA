@@ -61,6 +61,7 @@ class Command:
         self.console.print("  add task <project name> <task description>")
         self.console.print("  check <task ID>")
         self.console.print("  uncheck <task ID>")
+        self.console.print("  delete <task ID>")
         self.console.print()
 
 ## error
