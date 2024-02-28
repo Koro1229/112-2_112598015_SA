@@ -16,3 +16,11 @@ class Task:
     def set_deadline(self, deadline: str) -> None:
         self.deadline = deadline
 
+    def generate_task_string(self) -> str:
+        result = f"  [{'x' if self.is_done() else ' '}] {self.id}: {self.description}"
+        if self.deadline != "":
+            result += " "
+            result += self.deadline
+            
+        return result
+

@@ -16,7 +16,8 @@ class Command:
         for project, tasks in backend_tasks.items():
             self.console.print(project)
             for task in tasks:
-                self.console.print(f"  [{'x' if task.is_done() else ' '}] {task.id}: {task.description}")
+                # self.console.print(f"  [{'x' if task.is_done() else ' '}] {task.id}: {task.description}")
+                self.console.print(task.generate_task_string())
             self.console.print()
 
 ## add
@@ -77,6 +78,14 @@ class Command:
 ## delete
     def delete(self, id_string: str) -> None:
         result = self.backend.delete(id_string)
+        if result != "":
+            self.console.print(result)
+            self.console.print()
+
+## deadline
+    def deadline(self, command_line: str) -> None:
+        task_deadline = command_line.split(" ", 1)
+        result = self.backend.set_deadline(task_deadline[0], task_deadline[1])
         if result != "":
             self.console.print(result)
             self.console.print()

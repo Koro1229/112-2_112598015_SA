@@ -12,7 +12,6 @@ class TaskBackend:
         return self.tasks
 
 ## add
-        
     def add_project(self, name: str) -> str:
         project_name = self.tasks.get(name)
         if project_name is None:
@@ -51,5 +50,15 @@ class TaskBackend:
             for task in tasks:
                 if task.id == id_:
                     tasks.remove(task)
+                    return ""
+        return f"Could not find a task with an ID of {id_}"
+    
+## set_deadline
+    def set_deadline(self, id_string: str, deadline: str) -> str:
+        id_ = int(id_string)
+        for project, tasks in self.tasks.items():
+            for task in tasks:
+                if task.id == id_:
+                    task.set_deadline(deadline)
                     return ""
         return f"Could not find a task with an ID of {id_}"
