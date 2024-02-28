@@ -106,6 +106,28 @@ class ApplicationTest(unittest.TestCase):
             "  [ ] 4: add features",
             "")
 
+    def test_deadline_command(self):
+        self.execute("show")
+        self.execute("add project secrets")
+        self.execute("add task secrets Eat more donuts.")
+        self.execute("add task secrets Destroy all humans.")
+        self.execute("show")
+
+        self.read_lines(
+            "secrets",
+            "  [ ] 1: Eat more donuts.",
+            "  [ ] 2: Destroy all humans.",
+            "")
+        
+        self.execute("deadline 1 2024/02/29")
+        self.execute("show")
+
+        
+        self.read_lines(
+            "secrets",
+            "  [ ] 1: Eat more donuts. 2024/02/29",
+            "  [ ] 2: Destroy all humans.",
+            "")
 
     def execute(self, command):
         self.write(command + "\n")
