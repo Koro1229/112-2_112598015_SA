@@ -44,3 +44,12 @@ class TaskBackend:
                     return ""
         return f"Could not find a task with an ID of {id_}"
     
+## delete
+    def delete(self, id_string: str) -> str:
+        id_ = int(id_string)
+        for project, tasks in self.tasks.items():
+            for task in tasks:
+                if task.id == id_:
+                    tasks.remove(task)
+                    return ""
+        return f"Could not find a task with an ID of {id_}"

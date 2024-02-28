@@ -72,3 +72,10 @@ class Command:
 ## get
     def get(self) -> Dict[str, List[Task]]:
         return self.backend.get()
+
+## delete
+    def delete(self, id_string: str) -> None:
+        result = self.backend.delete(id_string)
+        if result != "":
+            self.console.print(result)
+            self.console.print()
