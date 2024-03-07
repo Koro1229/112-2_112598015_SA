@@ -34,8 +34,6 @@ class TaskList:
             self.cmd.uncheck(command_rest[1])
         elif command == "help":
             self.cmd.help()
-        elif command == "deadline":
-            self.cmd.deadline(command_rest[1])
         elif command == "delete":
             self.cmd.delete(command_rest[1])
         else:

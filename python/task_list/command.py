@@ -83,9 +83,9 @@ class Command:
             self.console.print()
 
 ## deadline
-    def deadline(self, command_line: str) -> None:
-        task_deadline = command_line.split(" ", 1)
-        result = self.backend.set_deadline(task_deadline[0], task_deadline[1])
-        if result != "":
-            self.console.print(result)
-            self.console.print()
+    # def deadline(self, command_line: str) -> None:
+    #     task_deadline = command_line.split(" ", 1)
+    #     result = self.backend.set_deadline(task_deadline[0], task_deadline[1])
+    #     if result != "":
+    #         self.console.print(result)
+    #         self.console.print()
