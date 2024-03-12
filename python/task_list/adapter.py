@@ -11,9 +11,8 @@ from task_list.commands.delete import Delete
 
 class CommandAdapter:
 
-    def __init__(self, console: Console, backend: TaskBackend) -> None:
+    def __init__(self, console: Console) -> None:
         self.console = console
-        self.backend = backend
 
     def execute(self, command_line: str) -> None:
         self.cmd = None
@@ -24,19 +23,19 @@ class CommandAdapter:
             command_rest = command_array[1]
 
         if command == "show":
-            self.cmd = Show(self.console, self.backend)
+            self.cmd = Show(self.console)
         elif command == "add":
-            self.cmd = Add(self.console, self.backend)
+            self.cmd = Add(self.console)
         elif command == "check":
-            self.cmd = Check(self.console, self.backend)
+            self.cmd = Check(self.console)
         elif command == "uncheck":
-            self.cmd = Uncheck(self.console, self.backend)
+            self.cmd = Uncheck(self.console)
         elif command == "help":
-            self.cmd = Help(self.console, self.backend)
+            self.cmd = Help(self.console)
         elif command == "delete":
-            self.cmd = Delete(self.console, self.backend)
+            self.cmd = Delete(self.console)
         else:
-            self.cmd = Error(self.console, self.backend)
+            self.cmd = Error(self.console)
             command_rest = command
 
         self.cmd.run(command_rest)
