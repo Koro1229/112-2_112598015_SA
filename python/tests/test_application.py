@@ -105,6 +105,9 @@ class ApplicationTest(unittest.TestCase):
             "  [ ] 3: refactor task list kata",
             "  [ ] 4: add features",
             "")
+        
+        self.execute("quit")
+
 
     def execute(self, command):
         self.write(command + "\n")
