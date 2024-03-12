@@ -6,7 +6,7 @@ from task_list.commands.uncheck import Uncheck
 from task_list.commands.help import Help
 from task_list.commands.error import Error
 from task_list.commands.delete import Delete
-from task_list.commands.command import Command
+# from task_list.commands.command import Command
 from task_list.backend import TaskBackend
 
 class TaskList:
@@ -15,7 +15,7 @@ class TaskList:
     def __init__(self, console: Console) -> None:
         self.console = console
         self.backend = TaskBackend()
-        self.cmd = Command(self.console, self.backend) #same console, backend
+        # self.cmd = Command(self.console, self.backend) #same console, backend
 
     ## run until quit
     def run(self) -> None:
@@ -52,5 +52,5 @@ class TaskList:
             cmd.run(command_rest[1])
         else:
             cmd = Error(self.console, self.backend)
-            self.cmd.error(command_rest[0])
+            cmd.run(command_rest[0])
 
