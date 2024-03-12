@@ -1,7 +1,6 @@
 from typing import Dict, List
 
-from task_list.task.entity.task import Task
-from task_list.task.usecase.create_task_usecase import CreateTaskUsecase
+from task_list.task import Task
 
 class TaskBackend:
     def __init__(self):
@@ -37,7 +36,7 @@ class TaskBackend:
         if project_tasks is None:
             return f"Could not find a project with the name {project}."
         else:
-            project_tasks.append(CreateTaskUsecase.execute(self.next_id(), description, False))
+            project_tasks.append(Task(self.next_id(), description, False))
             return ""
 
     def next_id(self) -> int:
