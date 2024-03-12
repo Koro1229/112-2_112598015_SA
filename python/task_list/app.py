@@ -1,7 +1,12 @@
-from typing import Dict, List
-
 from task_list.console import Console
-from task_list.command import Command
+from task_list.commands.show import Show
+from task_list.commands.add import Add
+from task_list.commands.check import Check
+from task_list.commands.uncheck import Uncheck
+from task_list.commands.help import Help
+from task_list.commands.error import Error
+from task_list.commands.delete import Delete
+from task_list.commands.command import Command
 from task_list.backend import TaskBackend
 
 class TaskList:
@@ -10,7 +15,7 @@ class TaskList:
     def __init__(self, console: Console) -> None:
         self.console = console
         self.backend = TaskBackend()
-        self.cmd = Command(self.console, self.backend) #same console
+        self.cmd = Command(self.console, self.backend) #same console, backend
 
     ## run until quit
     def run(self) -> None:
@@ -24,18 +29,28 @@ class TaskList:
     def execute(self, command_line: str) -> None:
         command_rest = command_line.split(" ", 1)
         command = command_rest[0]
+        if len(command_rest) == 1:
+            command_rest.append("")
+
         if command == "show":
-            self.cmd.show()
+            cmd = Show(self.console, self.backend)
+            cmd.run(command_rest[1])
         elif command == "add":
-            self.cmd.add(command_rest[1])
+            cmd = Add(self.console, self.backend)
+            cmd.run(command_rest[1])
         elif command == "check":
-            self.cmd.check(command_rest[1])
+            cmd = Check(self.console, self.backend)
+            cmd.run(command_rest[1])
         elif command == "uncheck":
-            self.cmd.uncheck(command_rest[1])
+            cmd = Uncheck(self.console, self.backend)
+            cmd.run(command_rest[1])
         elif command == "help":
-            self.cmd.help()
+            cmd = Help(self.console, self.backend)
+            cmd.run(command_rest[1])
         elif command == "delete":
-            self.cmd.delete(command_rest[1])
+            cmd = Delete(self.console, self.backend)
+            cmd.run(command_rest[1])
         else:
-            self.cmd.error(command)
+            cmd = Error(self.console, self.backend)
+            self.cmd.error(command_rest[0])
 
