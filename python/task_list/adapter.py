@@ -17,29 +17,26 @@ class CommandAdapter:
 
     def execute(self, command_line: str) -> None:
         self.cmd = None
-        command_rest = command_line.split(" ", 1)
-        command = command_rest[0]
-        if len(command_rest) == 1:
-            command_rest.append("")
+        command_array = command_line.split(" ", 1)
+        command = command_array[0]
+        command_rest = command
+        if len(command_array) != 1:
+            command_rest = command_array[1]
 
         if command == "show":
             self.cmd = Show(self.console, self.backend)
-            self.cmd.run(command_rest[1])
         elif command == "add":
             self.cmd = Add(self.console, self.backend)
-            self.cmd.run(command_rest[1])
         elif command == "check":
             self.cmd = Check(self.console, self.backend)
-            self.cmd.run(command_rest[1])
         elif command == "uncheck":
             self.cmd = Uncheck(self.console, self.backend)
-            self.cmd.run(command_rest[1])
         elif command == "help":
             self.cmd = Help(self.console, self.backend)
-            self.cmd.run(command_rest[1])
         elif command == "delete":
             self.cmd = Delete(self.console, self.backend)
-            self.cmd.run(command_rest[1])
         else:
             self.cmd = Error(self.console, self.backend)
-            self.cmd.run(command_rest[0])
+            command_rest = command
+
+        self.cmd.run(command_rest)
