@@ -2,7 +2,7 @@ from task_list.commands.command import Command
 
 class Show(Command):
     def run(self, command_rest) -> None:
-        backend_tasks = super().get()
+        backend_tasks = self.backend.get()
         for project, tasks in backend_tasks.items():
             self.console.print(project)
             for task in tasks:
