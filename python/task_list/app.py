@@ -1,7 +1,5 @@
-from typing import Dict, List
-
 from task_list.console import Console
-from task_list.command import Command
+from task_list.adapter import CommandAdapter
 from task_list.backend import TaskBackend
 
 class TaskList:
@@ -9,8 +7,7 @@ class TaskList:
 
     def __init__(self, console: Console) -> None:
         self.console = console
-        self.backend = TaskBackend()
-        self.cmd = Command(self.console, self.backend) #same console
+        self.adapter = CommandAdapter(self.console)
 
     ## run until quit
     def run(self) -> None:
@@ -22,20 +19,5 @@ class TaskList:
 
     ## applicaiton functions    
     def execute(self, command_line: str) -> None:
-        command_rest = command_line.split(" ", 1)
-        command = command_rest[0]
-        if command == "show":
-            self.cmd.show()
-        elif command == "add":
-            self.cmd.add(command_rest[1])
-        elif command == "check":
-            self.cmd.check(command_rest[1])
-        elif command == "uncheck":
-            self.cmd.uncheck(command_rest[1])
-        elif command == "help":
-            self.cmd.help()
-        elif command == "delete":
-            self.cmd.delete(command_rest[1])
-        else:
-            self.cmd.error(command)
+        self.adapter.execute(command_line)
 

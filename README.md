@@ -1,8 +1,33 @@
 # 112-2 SA
-112598015 HW
+112598015 Homework
 
-This is hw1 branch
+This is hw2
 
+# What I do
+
+1. 將 commands 分開來
+    - 所有的 commands 繼承 command.py 內的 class Command
+
+2. 新增一個 class CommandAdapter
+    - 承擔 commands 的分流的任務
+    - App.py 只需要使用 adapter.execute(command) 就行
+
+3. 新增一個 class TaskBackend
+    - 儲存 Task list
+    - 僅能透過此 class 與 儲存的 task list 互動
+    - (使用 Singleton pattern)
+
+4. 確定分層
+    - app
+    - adapter (TaskAdapter)
+    - commands (Check、Uncheck、Show、Delete、Help、Error)
+    - backend (TaskBackend)
+    - task
+
+5. 確保每層之間的交流僅與上下一層有關
+    - App 只依賴 adapter
+    - commands 都只與 TaskBackend 和 Console 互動，而不使用到 Task
+    - TaskBackend 只管理儲存的資料(Tasks)
 
 # Task List &nbsp; [![Build Status](https://travis-ci.org/codurance/task-list.png)](https://travis-ci.org/codurance/task-list)
 
