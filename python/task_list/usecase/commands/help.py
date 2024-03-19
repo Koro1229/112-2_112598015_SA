@@ -1,7 +1,7 @@
 from task_list.usecase.commands.command import Command
 
 class Help(Command):
-    def run(self, command_rest) -> None:
+    def run(self) -> None:
         self.console.print("Commands:")
         self.console.print("  show")
         self.console.print("  add project <project name>")

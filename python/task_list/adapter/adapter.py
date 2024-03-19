@@ -1,12 +1,7 @@
 from task_list.io.console import Console
 
-from task_list.usecase.commands.show import Show
-from task_list.usecase.commands.add import Add
-from task_list.usecase.commands.check import Check
-from task_list.usecase.commands.uncheck import Uncheck
-from task_list.usecase.commands.help import Help
-from task_list.usecase.commands.error import Error
-from task_list.usecase.commands.delete import Delete
+from task_list.adapter.command_factory import CommandFactory
+from task_list.usecase.commands.delete import Command
 
 class CommandAdapter:
 
@@ -21,20 +16,22 @@ class CommandAdapter:
         if len(command_array) != 1:
             command_rest = command_array[1]
 
-        if command == "show":
-            self.cmd = Show(self.console)
-        elif command == "add":
-            self.cmd = Add(self.console)
-        elif command == "check":
-            self.cmd = Check(self.console)
-        elif command == "uncheck":
-            self.cmd = Uncheck(self.console)
-        elif command == "help":
-            self.cmd = Help(self.console)
-        elif command == "delete":
-            self.cmd = Delete(self.console)
-        else:
-            self.cmd = Error(self.console)
-            command_rest = command
+        cmdFactory = CommandFactory(self.console)
+        cmdFactory.set_command_rest(command_rest)
 
-        self.cmd.run(command_rest)
+        if command == "show":
+            self.cmd = cmdFactory.create_show()
+        elif command == "add":
+            self.cmd = cmdFactory.create_add()
+        elif command == "check":
+            self.cmd = cmdFactory.create_check()
+        elif command == "uncheck":
+            self.cmd = cmdFactory.create_uncheck()
+        elif command == "help":
+            self.cmd = cmdFactory.create_help()
+        elif command == "delete":
+            self.cmd = cmdFactory.create_delete()
+        else:
+            self.cmd = cmdFactory.create_error()
+
+        self.cmd.run()
