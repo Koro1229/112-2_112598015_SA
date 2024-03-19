@@ -5,6 +5,3 @@ class Command:
     def __init__(self, console: Console) -> None:
         self.console = console
         self.backend = TaskList()
-
-    def run(self, command_rest: str) -> None:
-        pass
