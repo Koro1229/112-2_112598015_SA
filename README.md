@@ -1,7 +1,7 @@
 # 112-2 SA
 112598015 Homework
 
-This is hw2
+This is hw3
 
 # What I do
 
@@ -18,11 +18,10 @@ This is hw2
     - (使用 Singleton pattern)
 
 4. 確定分層
-    - app
-    - adapter (TaskAdapter)
-    - commands (Check、Uncheck、Show、Delete、Help、Error)
-    - backend (TaskBackend)
-    - task
+    - io - app、console
+    - controller - TaskAdapter
+    - usecase - Commands (Check、Uncheck、Show、Delete、Help、Error)
+    - entities - Task、TaskList
 
 5. 確保每層之間的交流僅與上下一層有關
     - App 只依賴 adapter
