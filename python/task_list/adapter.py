@@ -1,4 +1,4 @@
-from task_list.console import Console
+from task_list.io.console import Console
 
 from task_list.usecase.commands.show import Show
 from task_list.usecase.commands.add import Add
