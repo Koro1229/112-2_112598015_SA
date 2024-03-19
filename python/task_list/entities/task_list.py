@@ -1,6 +1,6 @@
 from typing import Dict, List
 
-from task_list.task import Task
+from task_list.entities.task import Task
 
 class Singleton(type):
     _instances = {}
@@ -11,7 +11,7 @@ class Singleton(type):
         return cls._instances[cls]
 
 
-class TaskBackend(metaclass = Singleton):
+class TaskList(metaclass = Singleton):
     def __init__(self):
         self.last_id: int = 0
         self.tasks: Dict[str, List[Task]] = dict()

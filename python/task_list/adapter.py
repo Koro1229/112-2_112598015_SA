@@ -1,5 +1,4 @@
 from task_list.console import Console
-from task_list.backend import TaskBackend
 
 from task_list.commands.show import Show
 from task_list.commands.add import Add
