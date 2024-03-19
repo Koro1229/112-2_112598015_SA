@@ -1,5 +1,5 @@
 from task_list.io.console import Console
-from task_list.adapter import CommandAdapter
+from task_list.controller.adapter import CommandAdapter
 
 class TaskList:
     QUIT = "quit"
