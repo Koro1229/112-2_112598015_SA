@@ -1,4 +1,4 @@
-from task_list.commands.command import Command
+from task_list.usecase.commands.command import Command
 
 class Delete(Command):
     def run(self, command_rest) -> None:
