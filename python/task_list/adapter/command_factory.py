@@ -1,5 +1,3 @@
-from task_list.io.console import Console
-
 from task_list.usecase.commands.show import Show
 from task_list.usecase.commands.add_project import AddProject
 from task_list.usecase.commands.add_task import AddTask
@@ -11,8 +9,7 @@ from task_list.usecase.commands.delete import Delete
 from task_list.usecase.commands.command import Command
 
 class CommandFactory():
-    def __init__(self, console: Console) -> None:
-        self.console = console
+    def __init__(self) -> None:
         self.command_rest = None
 
     def set_command_rest(self, command_rest: str) -> None:

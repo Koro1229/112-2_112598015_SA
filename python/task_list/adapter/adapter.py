@@ -17,7 +17,7 @@ class CommandAdapter:
         if len(command_array) != 1:
             command_rest = command_array[1]
 
-        cmdFactory = CommandFactory(self.console)
+        cmdFactory = CommandFactory()
         cmdFactory.set_command_rest(command_rest)
 
         if command == "show":
