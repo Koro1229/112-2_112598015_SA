@@ -6,7 +6,7 @@ class TaskList:
 
     def __init__(self, console: Console) -> None:
         self.console = console
-        self.adapter = CommandAdapter(self.console)
+        self.adapter = CommandAdapter()
 
     ## run until quit
     def run(self) -> None:

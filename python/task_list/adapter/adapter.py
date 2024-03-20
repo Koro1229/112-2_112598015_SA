@@ -1,13 +1,12 @@
 from typing import List
-from task_list.io.console import Console
 
 from task_list.adapter.command_factory import CommandFactory
 from task_list.usecase.commands.delete import Command
 
 class CommandAdapter:
 
-    def __init__(self, console: Console) -> None:
-        self.console = console
+    def __init__(self) -> None:
+        pass
 
     def execute(self, command_line: str) -> List[str]:
         self.cmd = None
