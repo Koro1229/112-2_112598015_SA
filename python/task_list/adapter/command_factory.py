@@ -19,30 +19,30 @@ class CommandFactory():
         self.command_rest = command_rest
 
     def create_show(self) -> Command:
-        cmd = Show(self.console)
+        cmd = Show()
         return cmd
     
     def create_help(self) -> Command:
-        cmd = Help(self.console)
+        cmd = Help()
         return cmd
     
     def create_error(self) -> Command:
-        cmd = Error(self.console)
+        cmd = Error()
         cmd.set_command_rest(self.command_rest)
         return cmd
     
     def create_check(self) -> Command:
-        cmd = Check(self.console)
+        cmd = Check()
         cmd.set_command_rest(self.command_rest)
         return cmd
     
     def create_uncheck(self) -> Command:
-        cmd = Uncheck(self.console)
+        cmd = Uncheck()
         cmd.set_command_rest(self.command_rest)
         return cmd
     
     def create_delete(self) -> Command:
-        cmd = Delete(self.console)
+        cmd = Delete()
         cmd.set_command_rest(self.command_rest)
         return cmd
     
@@ -61,11 +61,11 @@ class CommandFactory():
             return self.create_error()
 
     def create_add_project(self) -> Command:
-        cmd = AddProject(self.console)
+        cmd = AddProject()
         cmd.set_command_rest(self.command_rest)
         return cmd
 
     def create_add_task(self) -> Command:
-        cmd = AddTask(self.console)
+        cmd = AddTask()
         cmd.set_command_rest(self.command_rest)
         return cmd
