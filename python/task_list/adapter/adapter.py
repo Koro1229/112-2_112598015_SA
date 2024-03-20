@@ -32,6 +32,7 @@ class CommandAdapter:
         elif command == "delete":
             self.cmd = cmdFactory.create_delete()
         else:
+            cmdFactory.set_command_rest(command)
             self.cmd = cmdFactory.create_error()
 
         if self.cmd:
