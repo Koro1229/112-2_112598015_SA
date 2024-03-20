@@ -56,6 +56,9 @@ class CommandFactory():
         elif add_type == "task":
             self.set_command_rest(command_rest_array[1])
             return self.create_add_task()
+        else:
+            self.set_command_rest("add " + self.command_rest)
+            return self.create_error()
 
     def create_add_project(self) -> Command:
         cmd = AddProject(self.console)

@@ -1,3 +1,4 @@
+from typing import List
 from task_list.io.console import Console
 
 from task_list.adapter.command_factory import CommandFactory
@@ -8,7 +9,7 @@ class CommandAdapter:
     def __init__(self, console: Console) -> None:
         self.console = console
 
-    def execute(self, command_line: str) -> None:
+    def execute(self, command_line: str) -> List[str]:
         self.cmd = None
         command_array = command_line.split(" ", 1)
         command = command_array[0]
@@ -34,4 +35,7 @@ class CommandAdapter:
         else:
             self.cmd = cmdFactory.create_error()
 
-        self.cmd.run()
+        if self.cmd:
+            result = self.cmd.run()
+
+        return result

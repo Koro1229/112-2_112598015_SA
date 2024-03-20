@@ -1,8 +1,7 @@
+from typing import List
 from task_list.usecase.commands.command import Command
 
 class Check(Command):
-    def run(self) -> None:
+    def run(self) -> List[str]:
         result = self.task_list.set_done(self.command_rest, True)
-        if result != "":
-            self.console.print(result)
-            self.console.print()
+        return result

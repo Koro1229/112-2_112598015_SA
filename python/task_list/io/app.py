@@ -18,5 +18,7 @@ class TaskList:
 
     ## applicaiton functions    
     def execute(self, command_line: str) -> None:
-        self.adapter.execute(command_line)
-
+        result = self.adapter.execute(command_line)
+        if result != None:
+            for content in result:
+                self.console.print(content)
