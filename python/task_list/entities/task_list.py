@@ -5,7 +5,7 @@ from task_list.entities.task import Task
 
 class TaskList():
     def __init__(self):
-        self.last_id: int = 0
+        self.lastId: int = 0
         self.tasks: Dict[str, List[Task]] = dict()
 
 ## get
@@ -14,35 +14,35 @@ class TaskList():
     
 ## get_list
     def get_list_string(self) -> List[str]:
-        task_list_string = []
+        taskListString = []
         for project, tasks in self.tasks.items():
-            task_list_string.append(project)
+            taskListString.append(project)
             for task in tasks:
-                task_list_string.append(task.generate_task_string())
-            task_list_string.append("")
-        return task_list_string
+                taskListString.append(task.generate_task_string())
+            taskListString.append("")
+        return taskListString
 
 ## add
     def add_project(self, name: str) -> str:
-        project_name = self.tasks.get(name)
-        if project_name is None:
+        projectName = self.tasks.get(name)
+        if projectName is None:
             self.tasks[name] = []
             return ""
         else:
-            return f"{project_name} already exists."
+            return f"{projectName} already exists."
         
 
     def add_task(self, project: str, description: str) -> str:
-        project_tasks = self.tasks.get(project)
-        if project_tasks is None:
+        projectTasks = self.tasks.get(project)
+        if projectTasks is None:
             return f"Could not find a project with the name {project}."
         else:
-            project_tasks.append(Task(self.next_id(), description, False))
+            projectTasks.append(Task(self.next_id(), description, False))
             return ""
 
     def next_id(self) -> int:
-        self.last_id += 1
-        return self.last_id
+        self.lastId += 1
+        return self.lastId
     
 ## set_done
     def set_done(self, idString: str, done: bool) -> str:
