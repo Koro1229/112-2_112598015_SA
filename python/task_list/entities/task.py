@@ -5,9 +5,6 @@ class Task:
         self.id = id_
         self.description = description
         self.done = done
-
-    def set_id(self, id_= int) -> None:
-        self.id = id_
     
     def get_id(self) -> int:
         return self.id
@@ -17,10 +14,7 @@ class Task:
 
     def is_done(self) -> bool:
         return self.done
-    
-    def set_description(self, description: str) -> None:
-        self.description = description
-    
+
     def get_description(self) -> str:
         return self.description
 
