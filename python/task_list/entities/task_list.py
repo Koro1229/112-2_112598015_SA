@@ -45,8 +45,8 @@ class TaskList():
         return self.last_id
     
 ## set_done
-    def set_done(self, id_string: str, done: bool) -> str:
-        id_ = int(id_string)
+    def set_done(self, idString: str, done: bool) -> str:
+        id_ = int(idString)
         for project, tasks in self.tasks.items():
             for task in tasks:
                 if task.id == id_:
@@ -55,8 +55,8 @@ class TaskList():
         return f"Could not find a task with an ID of {id_}"
     
 ## delete
-    def delete(self, id_string: str) -> str:
-        id_ = int(id_string)
+    def delete(self, idString: str) -> str:
+        id_ = int(idString)
         for project, tasks in self.tasks.items():
             for task in tasks:
                 if task.id == id_:

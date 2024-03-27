@@ -4,6 +4,6 @@ from task_list.usecase.commands.command import Command
 
 class AddProject(Command):
 
-    def run(self, task_list: TaskList, command_rest: str) -> List[str]:
-        result = task_list.add_project(command_rest)
+    def run(self, taskList: TaskList, commandRest: str) -> List[str]:
+        result = taskList.add_project(commandRest)
         return result

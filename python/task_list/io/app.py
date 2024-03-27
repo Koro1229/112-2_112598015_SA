@@ -6,21 +6,21 @@ class KataTaskList:
     QUIT = "quit"
 
     def __init__(self, console: Console) -> None:
-        self.task_list = TaskList()
+        self.taskList = TaskList()
         self.console = console
 
     ## run until quit
     def run(self) -> None:
         while True:
-            command_str = self.console.input("> ")
-            if command_str == self.QUIT:
+            commandStr = self.console.input("> ")
+            if commandStr == self.QUIT:
                 break
-            self.execute(command_str)
+            self.execute(commandStr)
 
     ## execute command   
-    def execute(self, command_line: str) -> None:
+    def execute(self, commandLine: str) -> None:
         adapter = CommandAdapter()
-        result = adapter.execute(command_line, self.task_list)
+        result = adapter.execute(commandLine, self.taskList)
         if result != None:
             for content in result:
                 self.console.print(content)

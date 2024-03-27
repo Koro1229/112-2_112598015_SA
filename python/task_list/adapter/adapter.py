@@ -16,18 +16,18 @@ class CommandAdapter:
     def __init__(self) -> None:
         pass
 
-    def execute(self, command_line: str, task_list: TaskList) -> List[str]:
+    def execute(self, commandLine: str, taskList: TaskList) -> List[str]:
         cmd = None
-        command_array = command_line.split(" ", 1)
-        command = command_array[0]
-        command_rest = command
-        if len(command_array) != 1:
-            command_rest = command_array[1]
+        commandArray = commandLine.split(" ", 1)
+        command = commandArray[0]
+        commandRest = command
+        if len(commandArray) != 1:
+            commandRest = commandArray[1]
 
         if command == "show":
             cmd = Show()
         elif command == "add":
-            cmd, command_rest = self.create_add_command(command_rest)
+            cmd, commandRest = self.create_add_command(commandRest)
         elif command == "check":
             cmd = Check()
         elif command == "uncheck":
@@ -37,37 +37,37 @@ class CommandAdapter:
         elif command == "delete":
             cmd = Delete()
         else:
-            command_rest = command
+            commandRest = command
             cmd = Error()
 
         if cmd:
-            result = cmd.run(task_list, command_rest)
+            result = cmd.run(taskList, commandRest)
 
         return result
 
 ## tool
-    def create_add_command(self, command_rest: str):
+    def create_add_command(self, commandRest: str):
         cmd = None
-        if command_rest is None:
-            result_command_rest = "add " + command_rest
-            return Error(), result_command_rest
+        if commandRest is None:
+            resultCommandRest = "add " + commandRest
+            return Error(), resultCommandRest
         
-        command_rest_array = command_rest.split(" ", 1)
-        if len(command_rest_array) < 2:
-            result_command_rest = "add " + command_rest
-            return Error(), result_command_rest
+        commandRestArray = commandRest.split(" ", 1)
+        if len(commandRestArray) < 2:
+            resultCommandRest = "add " + commandRest
+            return Error(), resultCommandRest
         
         
-        add_object = command_rest_array[0]
+        add_object = commandRestArray[0]
 
         if add_object == "project":
             cmd = AddProject()
-            result_command_rest = command_rest_array[1]
-            return cmd, result_command_rest
+            resultCommandRest = commandRestArray[1]
+            return cmd, resultCommandRest
         elif add_object == "task":
             cmd = AddTask()
-            result_command_rest = command_rest_array[1].split(" ", 1)
-            return cmd, result_command_rest
+            resultCommandRest = commandRestArray[1].split(" ", 1)
+            return cmd, resultCommandRest
         else:
-            result_command_rest = "add " + command_rest
-            return Error(), result_command_rest
+            resultCommandRest = "add " + commandRest
+            return Error(), resultCommandRest
