@@ -1,11 +1,11 @@
 import sys
 
 from task_list.io.console import Console
-from task_list.io.app import TaskList
+from task_list.io.app import KataTaskList
 
 
 def main():
-    task_list = TaskList(Console(sys.stdin, sys.stdout))
+    task_list = KataTaskList(Console(sys.stdin, sys.stdout))
     task_list.run()
 
 

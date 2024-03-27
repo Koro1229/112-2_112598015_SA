@@ -1,12 +1,13 @@
 from task_list.io.console import Console
+from task_list.entities.task_list import TaskList
 from task_list.adapter.adapter import CommandAdapter
 
-class TaskList:
+class KataTaskList:
     QUIT = "quit"
 
     def __init__(self, console: Console) -> None:
+        self.task_list = TaskList()
         self.console = console
-        self.adapter = CommandAdapter()
 
     ## run until quit
     def run(self) -> None:
@@ -18,7 +19,8 @@ class TaskList:
 
     ## applicaiton functions    
     def execute(self, command_line: str) -> None:
-        result = self.adapter.execute(command_line)
+        adapter = CommandAdapter()
+        result = adapter.execute(command_line, self.task_list)
         if result != None:
             for content in result:
                 self.console.print(content)

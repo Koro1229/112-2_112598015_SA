@@ -1,5 +1,6 @@
 from typing import List
 
+from task_list.entities.task_list import TaskList
 from task_list.adapter.command_factory import CommandFactory
 from task_list.usecase.commands.delete import Command
 
@@ -8,7 +9,7 @@ class CommandAdapter:
     def __init__(self) -> None:
         pass
 
-    def execute(self, command_line: str) -> List[str]:
+    def execute(self, command_line: str, task_list: TaskList) -> List[str]:
         self.cmd = None
         command_array = command_line.split(" ", 1)
         command = command_array[0]
@@ -36,6 +37,6 @@ class CommandAdapter:
             self.cmd = cmdFactory.create_error()
 
         if self.cmd:
-            result = self.cmd.run()
+            result = self.cmd.run(task_list)
 
         return result

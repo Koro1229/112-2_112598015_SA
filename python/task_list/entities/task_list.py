@@ -2,16 +2,8 @@ from typing import Dict, List
 
 from task_list.entities.task import Task
 
-class Singleton(type):
-    _instances = {}
 
-    def __call__(cls, *args, **kwargs):
-        if cls not in cls._instances:
-            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
-        return cls._instances[cls]
-
-
-class TaskList(metaclass = Singleton):
+class TaskList():
     def __init__(self):
         self.last_id: int = 0
         self.tasks: Dict[str, List[Task]] = dict()
