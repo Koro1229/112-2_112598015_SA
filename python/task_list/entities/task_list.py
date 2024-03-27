@@ -32,13 +32,12 @@ class TaskList():
     def add_task(self, projectName: str, description: str) -> str:
         for project in self.projects:
             if project.get_project_name() == projectName:
-                project.add_task(Task(self.next_id(), description, False))
+                project.add_task(Task(self.next_id(), description))
                 return
         return f"Could not find a project with the name {projectName}."
     
 ## set_done
     def set_done(self, taskId: str, done: bool) -> str:
-        # taskId = int(idString)
         for project in self.projects:
             if project.is_task_exist(taskId):
                 project.set_done(taskId, done)
@@ -47,7 +46,6 @@ class TaskList():
     
 ## delete
     def delete(self, taskId: str) -> str:
-        # taskId = int(idString)
         for project in self.projects:
             if project.is_task_exist(taskId):
                 project.remove_task(taskId)
