@@ -45,6 +45,7 @@ class CommandAdapter:
 
         return result
 
+## tool
     def create_add_command(self, command_rest: str):
         cmd = None
         if command_rest is None:

@@ -17,7 +17,7 @@ class KataTaskList:
                 break
             self.execute(command_str)
 
-    ## applicaiton functions    
+    ## execute command   
     def execute(self, command_line: str) -> None:
         adapter = CommandAdapter()
         result = adapter.execute(command_line, self.task_list)
