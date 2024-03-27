@@ -1,65 +1,60 @@
-from typing import Dict, List
+from typing import List
 
+from task_list.entities.project import Project
 from task_list.entities.task import Task
 
 
 class TaskList():
     def __init__(self):
         self.lastId: int = 0
-        self.tasks: Dict[str, List[Task]] = dict()
-
-## get
-    def get(self) -> Dict[str, List[Task]]:
-        return self.tasks
+        self.projects: List[Project] = []
     
-## get_list
+## get_list_string
     def get_list_string(self) -> List[str]:
         taskListString = []
-        for project, tasks in self.tasks.items():
-            taskListString.append(project)
-            for task in tasks:
+
+        for project in self.projects:
+            taskListString.append(project.get_project_name())
+            projectTasks = project.get_project_tasks()
+            for task in projectTasks:
                 taskListString.append(task.generate_task_string())
             taskListString.append("")
+            
         return taskListString
 
 ## add
     def add_project(self, name: str) -> str:
-        projectName = self.tasks.get(name)
-        if projectName is None:
-            self.tasks[name] = []
-            return ""
-        else:
-            return f"{projectName} already exists."
-        
+        newProject = Project(name)
+        self.projects.append(newProject)
+        return ""
+        # # ToDo: check if project already exists
 
-    def add_task(self, project: str, description: str) -> str:
-        projectTasks = self.tasks.get(project)
-        if projectTasks is None:
-            return f"Could not find a project with the name {project}."
-        else:
-            projectTasks.append(Task(self.next_id(), description, False))
-            return ""
-
-    def next_id(self) -> int:
-        self.lastId += 1
-        return self.lastId
+    def add_task(self, projectName: str, description: str) -> str:
+        for project in self.projects:
+            if project.get_project_name() == projectName:
+                project.add_task(Task(self.next_id(), description, False))
+                return ""
+        return f"Could not find a project with the name {projectName}."
     
 ## set_done
     def set_done(self, idString: str, done: bool) -> str:
-        id_ = int(idString)
-        for project, tasks in self.tasks.items():
-            for task in tasks:
-                if task.id == id_:
-                    task.set_done(done)
-                    return ""
-        return f"Could not find a task with an ID of {id_}"
+        taskId = int(idString)
+        for project in self.projects:
+            if project.is_task_exist(taskId):
+                project.set_done(taskId, done)
+                return ""
+        return f"Could not find a task with an ID of {taskId}"
     
 ## delete
     def delete(self, idString: str) -> str:
-        id_ = int(idString)
-        for project, tasks in self.tasks.items():
-            for task in tasks:
-                if task.id == id_:
-                    tasks.remove(task)
-                    return ""
-        return f"Could not find a task with an ID of {id_}"
+        taskId = int(idString)
+        for project in self.projects:
+            if project.is_task_exist(taskId):
+                project.remove_task(taskId)
+                return ""
+        return f"Could not find a task with an ID of {taskId}"
+
+## tool
+    def next_id(self) -> int:
+        self.lastId += 1
+        return self.lastId
