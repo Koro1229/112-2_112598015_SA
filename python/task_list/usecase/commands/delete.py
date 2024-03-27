@@ -4,5 +4,5 @@ from task_list.usecase.commands.command import Command
 
 class Delete(Command):
     def run(self, taskList: TaskList, commandRest: str) -> List[str]:
-        result = taskList.delete(commandRest)
+        result = taskList.delete(int(commandRest))
         return result

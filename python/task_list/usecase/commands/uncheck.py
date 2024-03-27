@@ -4,5 +4,5 @@ from task_list.usecase.commands.command import Command
 
 class Uncheck(Command):
     def run(self, taskList: TaskList, commandRest: str) -> List[str]:
-        result = taskList.set_done(commandRest, False)
+        result = taskList.set_done(int(commandRest), False)
         return result

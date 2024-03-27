@@ -26,32 +26,32 @@ class TaskList():
     def add_project(self, name: str) -> str:
         newProject = Project(name)
         self.projects.append(newProject)
-        return ""
+        return
         # # ToDo: check if project already exists
 
     def add_task(self, projectName: str, description: str) -> str:
         for project in self.projects:
             if project.get_project_name() == projectName:
                 project.add_task(Task(self.next_id(), description, False))
-                return ""
+                return
         return f"Could not find a project with the name {projectName}."
     
 ## set_done
-    def set_done(self, idString: str, done: bool) -> str:
-        taskId = int(idString)
+    def set_done(self, taskId: str, done: bool) -> str:
+        # taskId = int(idString)
         for project in self.projects:
             if project.is_task_exist(taskId):
                 project.set_done(taskId, done)
-                return ""
+                return
         return f"Could not find a task with an ID of {taskId}"
     
 ## delete
-    def delete(self, idString: str) -> str:
-        taskId = int(idString)
+    def delete(self, taskId: str) -> str:
+        # taskId = int(idString)
         for project in self.projects:
             if project.is_task_exist(taskId):
                 project.remove_task(taskId)
-                return ""
+                return
         return f"Could not find a task with an ID of {taskId}"
 
 ## tool

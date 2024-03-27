@@ -4,5 +4,5 @@ from task_list.usecase.commands.command import Command
 
 class Check(Command):
     def run(self, taskList: TaskList, commandRest: str) -> List[str]:
-        result = taskList.set_done(commandRest, True)
+        result = taskList.set_done(int(commandRest), True)
         return result
