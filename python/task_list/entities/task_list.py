@@ -1,6 +1,7 @@
 from typing import List
 
 from task_list.entities.project import Project
+from task_list.entities.project_name import ProjectName
 from task_list.entities.task import Task
 
 
@@ -14,7 +15,7 @@ class TaskList():
         taskListString = []
 
         for project in self.projects:
-            taskListString.append(project.get_project_name())
+            taskListString.append(project.get_project_name().get_string())
             projectTasks = project.get_project_tasks()
             for task in projectTasks:
                 taskListString.append(task.generate_task_string())
@@ -23,21 +24,20 @@ class TaskList():
         return taskListString
 
 ## add
-    def add_project(self, name: str) -> str:
-        newProject = Project(name)
+    def add_project(self, projectName: ProjectName) -> str:
+        newProject = Project(projectName)
         self.projects.append(newProject)
         return
-        # # ToDo: check if project already exists
 
-    def add_task(self, projectName: str, description: str) -> str:
+    def add_task(self, projectName: ProjectName, description: str) -> str:
         for project in self.projects:
-            if project.get_project_name() == projectName:
+            if project.get_project_name().get_string() == projectName.get_string():
                 project.add_task(Task(self.next_id(), description))
                 return
         return f"Could not find a project with the name {projectName}."
     
 ## set_done
-    def set_done(self, taskId: str, done: bool) -> str:
+    def set_done(self, taskId: int, done: bool) -> str:
         for project in self.projects:
             if project.is_task_exist(taskId):
                 project.set_done(taskId, done)
@@ -45,7 +45,7 @@ class TaskList():
         return f"Could not find a task with an ID of {taskId}"
     
 ## delete
-    def delete(self, taskId: str) -> str:
+    def delete(self, taskId: int) -> str:
         for project in self.projects:
             if project.is_task_exist(taskId):
                 project.remove_task(taskId)

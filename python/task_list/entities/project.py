@@ -1,13 +1,14 @@
 from typing import List
 from task_list.entities.task import Task
+from task_list.entities.project_name import ProjectName
 
 class Project:
 
-    def __init__(self, projectName: str) -> None:
-        self.projectName: str = projectName
+    def __init__(self, projectName: ProjectName) -> None:
+        self.projectName: ProjectName = projectName
         self.toDoList: List[Task] = []
-        ##
-    def get_project_name(self) -> str:
+        
+    def get_project_name(self) -> ProjectName:
         return self.projectName
     
     def get_project_tasks(self) -> List[Task]:

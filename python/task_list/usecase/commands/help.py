@@ -3,7 +3,7 @@ from task_list.entities.task_list import TaskList
 from task_list.usecase.commands.command import Command
 
 class Help(Command):
-    def run(self, taskList: TaskList, commandRest: str) -> List[str]:
+    def run(self) -> List[str]:
         result = []
         result.append("Commands:")
         result.append("  show")
