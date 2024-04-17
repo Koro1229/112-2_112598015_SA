@@ -58,13 +58,13 @@ class CommandAdapter:
             return Error(), resultCommandRest
         
         
-        add_object = commandRestArray[0]
+        addObject = commandRestArray[0]
 
-        if add_object == "project":
+        if addObject == "project":
             cmd = AddProject()
             resultCommandRest = commandRestArray[1]
             return cmd, resultCommandRest
-        elif add_object == "task":
+        elif addObject == "task":
             cmd = AddTask()
             resultCommandRest = commandRestArray[1].split(" ", 1)
             return cmd, resultCommandRest
